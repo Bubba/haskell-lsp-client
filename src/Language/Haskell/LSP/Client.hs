@@ -36,11 +36,12 @@
 --
 --   * Implement proper exception handling.
 --
-module LSP.Client
+module Language.Haskell.LSP.Client
   (
   -- * Initialization
     start
   , Config (..)
+  , Handle
   -- * Receiving
   , RequestMessageHandler (..)
   , NotificationMessageHandler (..)
@@ -78,6 +79,8 @@ data ClientMessage
 
 data ResponseVar = forall resp . FromJSON resp =>
   ResponseVar (MVar (Maybe (Either LSP.ResponseError resp)))
+
+type Client = ClientMessage
 
 -- | The configuration of the Language Server Protocol client.
 -- 'toServer' and 'fromServer' are the 'Handle's which can be used
